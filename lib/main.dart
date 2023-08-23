@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_application/provider/staff_provider.dart';
 import 'package:sample_application/provider/students_provider.dart';
 import 'package:sample_application/screens/splash_screen/splash_screen.dart';
 
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => StudentProvider())
+        ChangeNotifierProvider(create: (_) => StudentProvider()),
+        ChangeNotifierProvider(create: (_) => StaffProvider())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
