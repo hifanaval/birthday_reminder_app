@@ -36,6 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: MediaQuery.of(context).size.height/9,
                   fit: BoxFit.cover,
                 ),
+                const SizedBox(height: 8),
                 const Text("BIRTHDAYS!!",
                 style: TextStyle(
                   color: Colors.deepPurple,

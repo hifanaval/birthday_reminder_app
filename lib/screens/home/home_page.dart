@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ListView(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
                         height: 60,
@@ -47,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         count: staffProvider.staffModelData!.staffcount! +
                             studentProvider.studentsModelData!.count!,
                       ),
+                      const SizedBox(height: 20),
                       staffProvider.staffModelData == null ||
                               studentProvider.studentsModelData == null ||
                               staffProvider.staffModelData!.staffs!.isEmpty ||
@@ -54,29 +54,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .studentsModelData!.students!.isEmpty
                           ? const NoBirthdayCard()
                           : Visibility(
-                              visible: studentProvider
-                                  .studentsModelData!.students!.isNotEmpty,
-                              child: SizedBox(
-                                height: 600,
-                                child: CardContainer(
-                                  itemcount: studentProvider
-                                      .studentsModelData!.students!.length,
-                                  name: studentProvider
-                                      .studentsModelData!.students!
-                                      .map((e) => e.studentName ?? "NA")
-                                      .toList(),
-                                  designation: studentProvider
-                                      .studentsModelData!.students!
-                                      .map((e) => e.designation ?? "NA")
-                                      .toList(),
-                                  imageUrl: studentProvider
-                                      .studentsModelData!.students!
-                                      .map((e) =>
-                                          '${Apis.baseUrl}${e.profilePic}')
-                                      .toList(),
-                                ),
+                              visible: staffProvider
+                                  .staffModelData!.staffs!.isNotEmpty,
+                              child: CardContainer(
+                                isStaff: true,
+                                itemcount: staffProvider
+                                    .staffModelData!.staffs!.length,
+                                imageUrl: staffProvider.staffModelData!.staffs!
+                                    .map(
+                                        (e) => '${Apis.baseUrl}${e.profilePic}')
+                                    .toList(),
+                                name: staffProvider.staffModelData!.staffs!
+                                    .map((e) => e.staffName ?? "NA")
+                                    .toList(),
+                                department: staffProvider
+                                    .staffModelData!.staffs!
+                                    .map((e) => e.department ?? "NA")
+                                    .toList(),
+                                designation: staffProvider
+                                    .staffModelData!.staffs!
+                                    .map((e) => e.designation ?? "NA")
+                                    .toList(),
                               ),
                             ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Visibility(
+                        visible: studentProvider
+                            .studentsModelData!.students!.isNotEmpty,
+                        child: CardContainer(
+                          itemcount: studentProvider
+                              .studentsModelData!.students!.length,
+                          imageUrl: studentProvider.studentsModelData!.students!
+                              .map((e) => '${Apis.baseUrl}${e.profilePic}')
+                              .toList(),
+                          name: studentProvider.studentsModelData!.students!
+                              .map((e) => e.studentName ?? "NA")
+                              .toList(),
+                          designation: studentProvider
+                              .studentsModelData!.students!
+                              .map((e) => e.designation ?? "NA")
+                              .toList(),
+                          course: studentProvider.studentsModelData!.students!
+                              .map((e) => e.course ?? "NA")
+                              .toList(),
+                          year: studentProvider.studentsModelData!.students!
+                              .map((e) => e.batchYear ?? "NA")
+                              .toList(),
+                        ),
+                      ),
                       const SizedBox(
                         height: 20,
                       ),

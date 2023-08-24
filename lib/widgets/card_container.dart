@@ -26,56 +26,86 @@ class CardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(   
-        ///idhok apporthenem ippotrheillenm expanded kodkan patla?
-        ///patayi onnm illa   
+    return ListView.separated(
+        shrinkWrap: true,
         itemCount: itemcount,
         separatorBuilder: (context, index) => const SizedBox(
-          height: 16,
-        ),
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            // _showAlertDialog(
-            //   context,
-            //   isStaff: isStaff,
-            //   name: name[index],
-            //   designation: designation[index],
-            //   course: course![index],
-            //   department: department![index],
-            //   year: year![index],
-            // );
-          },
-          child: Card(
-            elevation: 4,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              // height: 540,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      ImageClass.birthDayImg,
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,
+              height: 20,
+            ),
+        itemBuilder: (context, index) {
+          return GestureDetector(
+              onTap: () {
+                print('object');
+                showAlertDialog(
+                  context,
+                  isStaff: isStaff,
+                  name: name[index],
+                  imageUrl: imageUrl[index],
+                  designation: designation[index],
+                  course: course == null ? 'course' : course![index],
+                  department: department == null ? 'dep' : department![index],
+                  year: year == null ? 'yr' : year![index],
+
+                  ///set ayeelye??
+                  ///color oru nak illa
+                  ///ij matin
+                  ///iyyengen adh ready aakye??
+                  ///edh
+                  ///mone ontap
+                  ///mole ij ovde nokne
+                  ///screen thanne aan pakshe shredhcheelya
+                  ///pinne screen noki orbngeyn mole
+                  ///pinnim orngyo
+                  ///ilya
+                  ///ibdind
+                  ///onnu parnjero ndha cheydhennu
+                  ///mole null check cheyth athanne
+                  ///evdache
+                  ///idhaano?
+                  ///haa adh onn
+                  ///pinne thayth ind kanchera
+                );
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.7),
+                      blurRadius: 4,
+                      spreadRadius: -2,
+                      offset: const Offset(0, 3),
                     ),
+                  ],
+                  image: const DecorationImage(
+                    image: AssetImage(
+                      ImageClass.birthDayImg,
+                    ),
+                    alignment: Alignment.topCenter,
+                    fit: BoxFit.cover,
                   ),
-                  Column(
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 100),
                       CircleAvatar(
-                          radius: 80,
+                          radius: 48,
                           backgroundImage: NetworkImage(
                             imageUrl.isNotEmpty
                                 ? imageUrl[index]
                                 : ImageClass.profileImg,
                           )),
                       const SizedBox(
-                        height: 6,
+                        height: 8,
                       ),
                       Text(
                         "It is ${name[index]}'s Birthday",
-                      
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -95,7 +125,7 @@ class CardContainer extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 8,
                       ),
                       const Text(
                         "Let this special day brings you\na sea of happiness and joy.",
@@ -107,36 +137,30 @@ class CardContainer extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 14,
+                        height: 8,
                       ),
-                      const SizedBox(
-                        height: 20,
-                      )
                     ],
                   ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+                ),
+              ));
+        });
   }
 
-  void _showAlertDialog(
+  void showAlertDialog(
     BuildContext context, {
     required String name,
-    required String designation,
+    String? designation,
+    String? imageUrl,
     String? course,
     String? year,
     String? department,
-    bool? isStaff,
+    bool isStaff = false,
   }) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.purple[100],
             content: SizedBox(
               height: 300,
               width: MediaQuery.of(context).size.width,
@@ -146,10 +170,11 @@ class CardContainer extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  const Center(
+                  Center(
                     child: CircleAvatar(
                       radius: 80,
-                      backgroundImage: AssetImage(ImageClass.profileImg),
+                      backgroundImage:
+                          NetworkImage(imageUrl ?? ImageClass.profileImg),
                     ),
                   ),
                   const SizedBox(
@@ -167,17 +192,27 @@ class CardContainer extends StatelessWidget {
                           label: "Name",
                         ),
                         KeyValuePairWidget(
-                          text: designation,
+                          text: designation ?? 'Na', 
                           label: "Designation",
                         ),
-                        KeyValuePairWidget(
-                          text: isStaff! ? course! : department!,
-                          label: "Course",
-                        ),
-                        KeyValuePairWidget(
-                          text: year!,
-                          label: "Year",
-                        ),
+                        isStaff
+                            ? KeyValuePairWidget(
+                                text: department ?? 'Na',
+                                label: "Department",
+                              )
+                            : const SizedBox(),
+                        isStaff
+                            ? const SizedBox()
+                            : KeyValuePairWidget(
+                                text: course ?? 'NA',
+                                label: "Course",
+                              ),
+                        isStaff
+                            ? const SizedBox()
+                            : KeyValuePairWidget(
+                                text: year ?? 'NA',
+                                label: "Year",
+                              ),
                       ],
                     ),
                   ),
