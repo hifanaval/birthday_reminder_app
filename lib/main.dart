@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StaffProvider())
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Birthday Reminder',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

@@ -162,7 +162,7 @@ class CardContainer extends StatelessWidget {
         return AlertDialog(
             backgroundColor: Colors.purple[100],
             content: SizedBox(
-              height: 300,
+              height: 260,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -172,7 +172,7 @@ class CardContainer extends StatelessWidget {
                   ),
                   Center(
                     child: CircleAvatar(
-                      radius: 80,
+                      radius: 60,
                       backgroundImage:
                           NetworkImage(imageUrl ?? ImageClass.profileImg),
                     ),
@@ -192,7 +192,7 @@ class CardContainer extends StatelessWidget {
                           label: "Name",
                         ),
                         KeyValuePairWidget(
-                          text: designation ?? 'Na', 
+                          text: designation ?? 'Na',
                           label: "Designation",
                         ),
                         isStaff

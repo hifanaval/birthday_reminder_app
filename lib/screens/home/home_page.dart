@@ -34,82 +34,126 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, studentProvider, staffProvider, _) {
           return studentProvider.isLoading || staffProvider.isLoading
               ? const Center(child: CircularProgressIndicator())
-              : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ListView(
-                    children: [
-                      const SizedBox(
-                        height: 60,
-                      ),
-                      HeaderWidget(
-                        formattedDate: formattedDate,
-                        count: staffProvider.staffModelData!.staffcount! +
-                            studentProvider.studentsModelData!.count!,
-                      ),
-                      const SizedBox(height: 20),
-                      staffProvider.staffModelData == null ||
-                              studentProvider.studentsModelData == null ||
-                              staffProvider.staffModelData!.staffs!.isEmpty ||
-                              studentProvider
-                                  .studentsModelData!.students!.isEmpty
-                          ? const NoBirthdayCard()
-                          : Visibility(
-                              visible: staffProvider
-                                  .staffModelData!.staffs!.isNotEmpty,
-                              child: CardContainer(
-                                isStaff: true,
-                                itemcount: staffProvider
-                                    .staffModelData!.staffs!.length,
-                                imageUrl: staffProvider.staffModelData!.staffs!
-                                    .map(
-                                        (e) => '${Apis.baseUrl}${e.profilePic}')
-                                    .toList(),
-                                name: staffProvider.staffModelData!.staffs!
-                                    .map((e) => e.staffName ?? "NA")
-                                    .toList(),
-                                department: staffProvider
-                                    .staffModelData!.staffs!
-                                    .map((e) => e.department ?? "NA")
-                                    .toList(),
-                                designation: staffProvider
-                                    .staffModelData!.staffs!
-                                    .map((e) => e.designation ?? "NA")
-                                    .toList(),
-                              ),
+              : staffProvider.staffModelData == null &&
+                      studentProvider.studentsModelData == null
+                  ? const Text("no data")
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: ListView(
+                        children: [
+                          const SizedBox(
+                            height: 60,
+                          ),
+                          HeaderWidget(
+                            formattedDate: formattedDate,
+                            count: staffProvider.staffModelData!.staffcount !=
+                                        null ||
+                                    studentProvider.studentsModelData!.count !=
+                                        null
+                                ? staffProvider.staffModelData!.staffcount! +
+                                    studentProvider.studentsModelData!.count!
+                                : 0,
+                          ),
+                          const SizedBox(height: 20),
+                          staffProvider.staffModelData == null &&
+                                  studentProvider.studentsModelData == null &&
+                                  staffProvider
+                                      .staffModelData!.staffs!.isEmpty &&
+                                  studentProvider
+                                      .studentsModelData!.students!.isEmpty
+                              ? const NoBirthdayCard()
+                              : Visibility(
+                                  visible: staffProvider
+                                      .staffModelData!.staffs!.isNotEmpty,
+                                  child: CardContainer(
+                                    isStaff: true,
+                                    itemcount: staffProvider
+                                        .staffModelData!.staffs!.length,
+                                    imageUrl: staffProvider
+                                        .staffModelData!.staffs!
+                                        .map((e) {
+                                      if (e.profilePic != null) {
+                                        return '${Apis.baseUrl}${e.profilePic}';
+                                      } else {
+                                        return '';
+                                      }
+                                    }).toList(),
+                                    name: staffProvider.staffModelData!.staffs!
+                                        .map((e) {
+                                      if (e.staffName != null) {
+                                        return e.staffName ?? "NA";
+                                      }
+                                      return '';
+                                    }).toList(),
+                                    department: staffProvider
+                                        .staffModelData!.staffs!
+                                        .map((e) {
+                                      if (e.department != null) {
+                                        return e.department ?? "NA";
+                                      }
+                                      return '';
+                                    }).toList(),
+                                    designation: staffProvider
+                                        .staffModelData!.staffs!
+                                        .map((e) {
+                                      if (e.designation != null) {
+                                        return e.designation ?? "NA";
+                                      }
+                                      return '';
+                                    }).toList(),
+
+                                    /// kaynjile tym
+                                    /// birthday oraalk ind
+                                    /// paskhe idhil no birthday today aan kanikne
+                                    /// ilya same avstha aan:(
+                                    /// ooh scn
+                                    /// hm
+                                  ),
+                                ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          Visibility(
+                            visible: studentProvider
+                                .studentsModelData!.students!.isNotEmpty,
+                            child: CardContainer(
+                              itemcount: studentProvider
+                                  .studentsModelData!.students!.length,
+                              imageUrl: studentProvider
+                                  .studentsModelData!.students!
+                                  .map((e) {
+                                if (e.profilePic != null) {
+                                  return '${Apis.baseUrl}${e.profilePic}';
+                                } else {
+                                  return '';
+                                }
+                              }).toList(),
+                              name: studentProvider.studentsModelData!.students!
+                                  .map((e) => e.studentName ?? "NA")
+                                  .toList(),
+                              designation: studentProvider
+                                  .studentsModelData!.students!
+                                  .map((e) => e.designation ?? "NA")
+                                  .toList(),
+                              course: studentProvider
+                                  .studentsModelData!.students!
+                                  .map((e) => e.course ?? "NA")
+                                  .toList(),
+                              year: studentProvider.studentsModelData!.students!
+                                  .map((e) => e.batchYear ?? "NA")
+                                  .toList(),
                             ),
-                      const SizedBox(
-                        height: 40,
+
+                            /// ndhan mole
+                            /// onnulya monecheythote medam
+                            /// hhaaa
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
-                      Visibility(
-                        visible: studentProvider
-                            .studentsModelData!.students!.isNotEmpty,
-                        child: CardContainer(
-                          itemcount: studentProvider
-                              .studentsModelData!.students!.length,
-                          imageUrl: studentProvider.studentsModelData!.students!
-                              .map((e) => '${Apis.baseUrl}${e.profilePic}')
-                              .toList(),
-                          name: studentProvider.studentsModelData!.students!
-                              .map((e) => e.studentName ?? "NA")
-                              .toList(),
-                          designation: studentProvider
-                              .studentsModelData!.students!
-                              .map((e) => e.designation ?? "NA")
-                              .toList(),
-                          course: studentProvider.studentsModelData!.students!
-                              .map((e) => e.course ?? "NA")
-                              .toList(),
-                          year: studentProvider.studentsModelData!.students!
-                              .map((e) => e.batchYear ?? "NA")
-                              .toList(),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                );
+                    );
         },
       ),
     );

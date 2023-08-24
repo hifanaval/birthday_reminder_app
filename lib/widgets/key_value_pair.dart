@@ -36,20 +36,9 @@ class KeyValuePairWidget extends StatelessWidget {
           flex: 2,
           child: Text(
             text,
-            // studentProvider
-            //             .studentsModelData!
-            //             .count ==
-            //         0
-            //     ? "No data"
-            //     : studentProvider
-            //         .studentsModelData!
-            //         .students![
-            //             index]
-            //         .designation!,
-
             style: const TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
               color: Colors.black54,
             ),
           ),
