@@ -46,24 +46,7 @@ class CardContainer extends StatelessWidget {
                   department: department == null ? 'dep' : department![index],
                   year: year == null ? 'yr' : year![index],
 
-                  ///set ayeelye??
-                  ///color oru nak illa
-                  ///ij matin
-                  ///iyyengen adh ready aakye??
-                  ///edh
-                  ///mone ontap
-                  ///mole ij ovde nokne
-                  ///screen thanne aan pakshe shredhcheelya
-                  ///pinne screen noki orbngeyn mole
-                  ///pinnim orngyo
-                  ///ilya
-                  ///ibdind
-                  ///onnu parnjero ndha cheydhennu
-                  ///mole null check cheyth athanne
-                  ///evdache
-                  ///idhaano?
-                  ///haa adh onn
-                  ///pinne thayth ind kanchera
+                 
                 );
               },
               child: Container(

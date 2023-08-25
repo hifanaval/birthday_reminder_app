@@ -102,12 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       return '';
                                     }).toList(),
 
-                                    /// kaynjile tym
-                                    /// birthday oraalk ind
-                                    /// paskhe idhil no birthday today aan kanikne
-                                    /// ilya same avstha aan:(
-                                    /// ooh scn
-                                    /// hm
+                                    
                                   ),
                                 ),
                           const SizedBox(
@@ -144,9 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .toList(),
                             ),
 
-                            /// ndhan mole
-                            /// onnulya monecheythote medam
-                            /// hhaaa
+                            
                           ),
                           const SizedBox(
                             height: 20,
