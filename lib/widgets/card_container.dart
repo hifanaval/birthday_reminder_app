@@ -145,7 +145,7 @@ class CardContainer extends StatelessWidget {
         return AlertDialog(
             backgroundColor: Colors.purple[100],
             content: SizedBox(
-              height: 260,
+              height: 320,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

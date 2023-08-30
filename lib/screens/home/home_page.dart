@@ -55,14 +55,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : 0,
                           ),
                           const SizedBox(height: 20),
-                          staffProvider.staffModelData == null &&
-                                  studentProvider.studentsModelData == null &&
+                          staffProvider.staffModelData != null &&
+                                  studentProvider.studentsModelData != null
+                                  &&
                                   staffProvider
-                                      .staffModelData!.staffs!.isEmpty &&
+                                      .staffModelData!.staffs!.isNotEmpty &&
                                   studentProvider
-                                      .studentsModelData!.students!.isEmpty
-                              ? const NoBirthdayCard()
-                              : Visibility(
+                                      .studentsModelData!.students!.isNotEmpty
+                              ? 
+                              // const NoBirthdayCard()
+                              // : 
+                              Visibility(
                                   visible: staffProvider
                                       .staffModelData!.staffs!.isNotEmpty,
                                   child: CardContainer(
@@ -104,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     
                                   ),
-                                ),
+                                ):const NoBirthdayCard(),
                           const SizedBox(
                             height: 40,
                           ),
