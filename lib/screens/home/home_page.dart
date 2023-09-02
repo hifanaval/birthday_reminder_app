@@ -55,59 +55,63 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : 0,
                           ),
                           const SizedBox(height: 20),
-                          staffProvider.staffModelData != null &&
-                                  studentProvider.studentsModelData != null
-                                  &&
-                                  staffProvider
-                                      .staffModelData!.staffs!.isNotEmpty &&
-                                  studentProvider
-                                      .studentsModelData!.students!.isNotEmpty
-                              ? 
-                              // const NoBirthdayCard()
-                              // : 
-                              Visibility(
-                                  visible: staffProvider
-                                      .staffModelData!.staffs!.isNotEmpty,
-                                  child: CardContainer(
-                                    isStaff: true,
-                                    itemcount: staffProvider
-                                        .staffModelData!.staffs!.length,
-                                    imageUrl: staffProvider
-                                        .staffModelData!.staffs!
-                                        .map((e) {
-                                      if (e.profilePic != null) {
-                                        return '${Apis.baseUrl}${e.profilePic}';
-                                      } else {
-                                        return '';
-                                      }
-                                    }).toList(),
-                                    name: staffProvider.staffModelData!.staffs!
-                                        .map((e) {
-                                      if (e.staffName != null) {
-                                        return e.staffName ?? "NA";
-                                      }
-                                      return '';
-                                    }).toList(),
-                                    department: staffProvider
-                                        .staffModelData!.staffs!
-                                        .map((e) {
-                                      if (e.department != null) {
-                                        return e.department ?? "NA";
-                                      }
-                                      return '';
-                                    }).toList(),
-                                    designation: staffProvider
-                                        .staffModelData!.staffs!
-                                        .map((e) {
-                                      if (e.designation != null) {
-                                        return e.designation ?? "NA";
-                                      }
-                                      return '';
-                                    }).toList(),
-
-                                    
-                                  ),
-                                ):const NoBirthdayCard(),
+                          // staffProvider.staffModelData == null &&
+                          //         studentProvider.studentsModelData == null &&
+                          //         staffProvider
+                          //             .staffModelData!.staffs!.isEmpty &&
+                          //         studentProvider
+                          //             .studentsModelData!.students!.isEmpty
+                          //     ?
+                          //     const NoBirthdayCard()
+                          //     :
+                          Visibility(
+                            visible:
+                                staffProvider.staffModelData?.staffs!.isEmpty ==
+                                        true &&
+                                    studentProvider.studentsModelData?.students!
+                                            .isEmpty ==
+                                        true,
+                            child: const NoBirthdayCard(),
+                          ),
+                          Visibility(
+                            visible: staffProvider
+                                .staffModelData!.staffs!.isNotEmpty,
+                            child: CardContainer(
+                              isStaff: true,
+                              itemcount:
+                                  staffProvider.staffModelData!.staffs!.length,
+                              imageUrl: staffProvider.staffModelData!.staffs!
+                                  .map((e) {
+                                if (e.profilePic != null) {
+                                  return '${Apis.baseUrl}${e.profilePic}';
+                                } else {
+                                  return '';
+                                }
+                              }).toList(),
+                              name: staffProvider.staffModelData!.staffs!
+                                  .map((e) {
+                                if (e.staffName != null) {
+                                  return e.staffName ?? "NA";
+                                }
+                                return '';
+                              }).toList(),
+                              department: staffProvider.staffModelData!.staffs!
+                                  .map((e) {
+                                if (e.department != null) {
+                                  return e.department ?? "NA";
+                                }
+                                return '';
+                              }).toList(),
+                              designation: staffProvider.staffModelData!.staffs!
+                                  .map((e) {
+                                if (e.designation != null) {
+                                  return e.designation ?? "NA";
+                                }
+                                return '';
+                              }).toList(),
+                            ),
+                          ),
+                          // : const NoBirthdayCard(),
                           const SizedBox(
                             height: 40,
                           ),
@@ -141,8 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   .map((e) => e.batchYear ?? "NA")
                                   .toList(),
                             ),
-
-                            
                           ),
                           const SizedBox(
                             height: 20,

@@ -45,8 +45,6 @@ class CardContainer extends StatelessWidget {
                   course: course == null ? 'course' : course![index],
                   department: department == null ? 'dep' : department![index],
                   year: year == null ? 'yr' : year![index],
-
-                 
                 );
               },
               child: Container(
@@ -66,7 +64,7 @@ class CardContainer extends StatelessWidget {
                       ImageClass.birthDayImg,
                     ),
                     alignment: Alignment.topCenter,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
                 child: Padding(
@@ -77,12 +75,22 @@ class CardContainer extends StatelessWidget {
                     children: [
                       const SizedBox(height: 100),
                       CircleAvatar(
-                          radius: 48,
-                          backgroundImage: NetworkImage(
-                            imageUrl.isNotEmpty
-                                ? imageUrl[index]
-                                : ImageClass.profileImg,
-                          )),
+                        radius: 48,
+                        backgroundColor:
+                            Colors.transparent, // Set a transparent background
+                        child: ClipOval(
+                          child: Image(
+                            image: NetworkImage(
+                              imageUrl.isNotEmpty
+                                  ? imageUrl[index]
+                                  : ImageClass.profileImg,
+                            ),
+                            fit: BoxFit.fill, // Set the BoxFit property here
+                            width: 96, // Set the desired width
+                            height: 96, // Set the desired height
+                          ),
+                        ),
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -156,8 +164,16 @@ class CardContainer extends StatelessWidget {
                   Center(
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundImage:
-                          NetworkImage(imageUrl ?? ImageClass.profileImg),
+                      backgroundColor: Colors.transparent,
+                      child: ClipOval(
+                        child: Image(
+                          image:
+                              NetworkImage(imageUrl ?? ImageClass.profileImg),
+                          fit: BoxFit.fill, // Set your BoxFit here
+                          width: 120, // Set your desired width
+                          height: 120, // Set your desired height
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
